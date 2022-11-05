@@ -42,9 +42,9 @@ The workflow for sending to api is:
 3) POST to the api as ```data=``` and response will be plaintext msgpack to be decoded using ```msgpack.unpackb()```
 
 OR
-2) Get msgpack data (such as ```exampleData``` variable inside of main.py)
-3) Add to another json and add to the key "data"
-4) POST to the api as ```data=``` and response will be plaintext msgpack to be decoded using ```msgpack.unpackb()```
+1) Get msgpack data (such as ```exampleData``` variable inside of main.py)
+2) Add to another json and add to the key "data"
+3) POST to the api as ```data=``` and response will be plaintext msgpack to be decoded using ```msgpack.unpackb()```
 
 
 ## Parsing response
