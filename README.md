@@ -1,5 +1,7 @@
 # dbfz-api-py
- Async library for interfacing with the replay REST API of Dragonball FighterZ
+ Async library for interfacing with the replay REST API of Dragonball FighterZ. 
+ 
+Massively inspired by [Felix Windström's](https://twitter.com/sov_gott_games/) creation of http://ratingupdate.info/.
 
 ## How the API works
 The API works by sending a POST request to https://dbf.channel.or.jp/api/catalog/get_replay. 
@@ -7,28 +9,90 @@ The header needs to contain ```Content Type: application/x-www-form-urlencoded``
 
 The server will then give a response back in hex encoded messagepack which can be unpacked.
 
+The request for the replay requires having a **very** specific timestamp(?) which is in hex, this can be gotten by using sending a POST request to https://dbf.channel.or.jp/api/user/login. Follows the same suite as above.
+## Headers
+```python
+headers = {
+    "Host": "dbf.channel.or.jp",
+    'Content-Type': 'application/x-www-form-urlencoded',
+}
+```
+
+These are the only headers needed for sending a request to the API endpoints
+
 ## Making request
-### JSON Structure
+### JSON Structure for login_url
+```python
+[
+    [
+        "", 
+        "", 
+        2,
+        "0.0.3", 
+        3
+    ],
+    [
+        "76561198077238939",
+        "110000106f8de9b", 
+        256, 
+        0
+    ]
+]
+```
+
+The workflow for sending to api is:
+1) Get json and pack to msgpack
+2) Add to another json and add to the key "data", and transform the escaped hex to hex. For example: ```binascii.hexlify(msgpack.packb(loginData))```
+3) POST to the api as ```data=``` and response will be plaintext msgpack to be decoded using ```msgpack.unpackb()```
+
+After, you get a response from the server such as the following:
+```python
+[
+    [
+        "636d55d3a3736",
+        0,
+        "2022/11/11 04:49:39",
+        "0.0.3",
+        "0.0.3",
+        "0.0.3",
+        "",
+        ""
+    ],
+    [
+        0,
+        [
+            "180205073302944623",
+            "Deviance",
+            "76561198077238939",
+            "110000106f8de9b",
+            869826
+        ]
+    ]
+]
+```
+Which you take the first value (in the example above would be ```636d55d3a3736```) and put that into the JSON for the get_replay_url below.
+
+### JSON Structure for get_replay_url
 ```python
 [
   [
     "180205073302944623", # player ID doing request(?)
-    "6365a8c972d62", # timestamp which is always around 2-3 years ahead, can mostly ignore (current timestamp = Friday, 30 May 2025 13:39:53.938)
+    timestamp(), # timestamp which is taken from the login_url request as shown above
     2, # unknown
     "0.0.3", # game version
-    3
+    3 # unknown, probably platform such as PC and PS4
   ],
   [
-    7,
+    7, # unknown
     1, # order by [1: newest, 2: views, etc]
     0, # number of replay pages scrolled (starts at 0), max is 50000 upwards but gets very slow so best to stick to 5000 or less
-    10,
+    10, # number of matches queried, can be more than 10000
     [
-      28,
+      28, # unknown
       -1, # character list, [all character: -1, ssj goku: 0, ssj vegeta: 1, etc] always goes upwards (easy to make enum)
       102, # query for play mode, [all modes: -1 , ranked: 102 , casual: 104, arena: 103, ring: 105, ring party match: 107, tournament: 110]
-      1, # queries from this number downwards up to 10(?) ranks (starts at 1(?))
-      -1,
+      1, # queries from this number downwards up to 10 ranks (starts at 1), can go up to 50000 upwards but gets very slow so best to stick to 5000 or less
+      -1, # unknown
       []
     ]
   ]
@@ -38,11 +102,11 @@ The server will then give a response back in hex encoded messagepack which can b
 ### Workflow to Send Request
 The workflow for sending to api is:
 1) Get json and pack to msgpack
-2) Add to another json and add to the key "data", and transform the escaped hex to hex. For example: ```binascii.hexlify(msgpack.packb(jsonData))```
+2) Add to another json and add to the key "data", and transform the escaped hex to hex. For example: ```binascii.hexlify(msgpack.packb(replayData))```
 3) POST to the api as ```data=``` and response will be plaintext msgpack to be decoded using ```msgpack.unpackb()```
 
 OR
-1) Get msgpack data (such as ```exampleData``` variable inside of main.py)
+1) Get msgpack data (such as ```9295b2313830323035303733333032393434363233ad3633356661306433313734303802a5302e302e3303950701000a961cffff01ff90```)
 2) Add to another json and add to the key "data"
 3) POST to the api as ```data=``` and response will be plaintext msgpack to be decoded using ```msgpack.unpackb()```
 
