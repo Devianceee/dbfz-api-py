@@ -138,7 +138,7 @@ The JSON always has 10 matches inside it with the first player always being the 
         10,
         [
             [
-                221105064149496874,
+                221105064149496874, # unique identifer for the match itself
                 28,
                 "WIN_RkmRVer028",
                 [ # characters for player who won
