@@ -78,7 +78,7 @@ Which you take the first value (in the example above would be ```636d55d3a3736``
 ```python
 [
   [
-    "180205073302944623", # player ID doing request(?)
+    "180205073302944623", # player ID doing request
     timestamp(), # timestamp which is taken from the login_url request as shown above
     2, # unknown
     "0.0.3", # game version
@@ -153,7 +153,7 @@ The JSON always has 10 matches inside it with the first player always being the 
                 ],
                 [ # person who won
                     [
-                        "211127010233268016",
+                        "211127010233268016", # player ID who won
                         "Deviance",
                         "76561199013492555",
                         "11000013ec6f74b",
@@ -176,7 +176,7 @@ The JSON always has 10 matches inside it with the first player always being the 
                 ],
                 [ # person who lost
                     [
-                        "210319054513269637",
+                        "210319054513269637", # player ID who lost
                         "paddu",
                         "76561199080463934",
                         "110000142c4de3e",
