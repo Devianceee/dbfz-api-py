@@ -3,6 +3,8 @@
  
 Massively inspired by [Felix Windström's](https://twitter.com/sov_gott_games/) creation of http://ratingupdate.info/.
 
+Please keep in mind this is a Python implementation of dealing with the API. Depending on how Messagepack is done on your preferred language, some aspects may change.
+
 ## How the API works
 The API works by sending a POST request to https://dbf.channel.or.jp/api/catalog/get_replay. 
 The header needs to contain ```Content Type: application/x-www-form-urlencoded``` as you need to pass a hex (non-escaped) encoded messagepack to the server.
