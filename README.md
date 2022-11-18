@@ -126,7 +126,7 @@ The JSON always has 10 matches inside it with the first player always being the 
     [
         "6365b7aff20b5",
         0,
-        "2022/11/05 10:09:03", # time it was queried (irrelevant to the actual match stats)
+        "2022/11/05 10:09:03", # time it was queried in JST (irrelevant to the actual match stats)
         "0.0.3",
         "0.0.3",
         "0.0.3",
