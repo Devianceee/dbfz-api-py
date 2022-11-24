@@ -44,7 +44,7 @@ These are the only headers needed for sending a request to the API endpoints
 
 The workflow for sending to api is:
 1) Get json and pack to msgpack
-2) Add to another json and add to the key "data", and transform the escaped hex to hex. For example: ```binascii.hexlify(msgpack.packb(loginData))```
+2) Add to another json and add to the key "data", and transform the escaped hex to hex. For example: ```binascii.hexlify(msgpack.packb(loginData))```. Example of the hex would be ```dd00000002dd00000005a0a002a5302e302e3303dd00000004b13736353631313938303737323338393339af313130303030313036663864653962cd010000```
 3) POST to the api as ```data=``` and response will be plaintext msgpack to be decoded using ```msgpack.unpackb()```
 
 After, you get a response from the server such as the following:
