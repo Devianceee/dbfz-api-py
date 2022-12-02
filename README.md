@@ -20,7 +20,7 @@ headers = {
 }
 ```
 
-These are the only headers needed for sending a request to the API endpoints
+These are the only headers needed for sending a request to the API endpoints (For a lot of these headers, they're VERY specific to your own game login which can be found by using a packet sniffer application such as Fiddler to find these out)
 
 ## Making request
 ### JSON Structure for login_url
@@ -34,8 +34,8 @@ These are the only headers needed for sending a request to the API endpoints
         3
     ],
     [
-        "76561198077238939",
-        "110000106f8de9b", 
+        "76561198077238939", # MUST be specific to your own login parameters, don't try to use this it won't work
+        "110000106f8de9b", # MUST be specific to your own login parameters, don't try to use this it won't work
         256, 
         0
     ]
