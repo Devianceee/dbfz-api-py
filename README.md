@@ -78,7 +78,7 @@ Which you take the first value (in the example above would be ```636d55d3a3736``
 ```python
 [
   [
-    "180205073302944623", # player ID doing request
+    "180205073302944623", # player ID doing request, please use your own player ID as this rate limits the actual user from playing
     timestamp(), # timestamp which is taken from the login_url request as shown above
     2, # unknown
     "0.0.3", # game version
