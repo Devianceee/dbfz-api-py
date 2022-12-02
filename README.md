@@ -34,8 +34,8 @@ These are the only headers needed for sending a request to the API endpoints (Fo
         3
     ],
     [
-        "76561198077238939", # MUST be specific to your own login parameters, don't try to use this it won't work
-        "110000106f8de9b", # MUST be specific to your own login parameters, don't try to use this it won't work
+        "76561198077238919", # MUST be specific to your own login parameters, don't try to use this it won't work
+        "110000106f8de9a", # MUST be specific to your own login parameters, don't try to use this it won't work
         256, 
         0
     ]
@@ -63,7 +63,7 @@ After, you get a response from the server such as the following:
     [
         0,
         [
-            "180205073302944623",
+            "180205073302944621",
             "Deviance",
             "76561198077238939",
             "110000106f8de9b",
@@ -78,7 +78,7 @@ Which you take the first value (in the example above would be ```636d55d3a3736``
 ```python
 [
   [
-    "180205073302944623", # player ID doing request, please use your own player ID as this rate limits the actual user from playing
+    "180205073302944621", # player ID doing request, please use your own player ID as this rate limits the actual user from playing
     timestamp(), # timestamp which is taken from the login_url request as shown above
     2, # unknown
     "0.0.3", # game version
